@@ -68,7 +68,7 @@ class AgentPipeline:
             except Exception:
                 continue
         # Keep the payload well under Groq free-tier per-minute token limits.
-        payload = json.dumps({"search_results": raw_results})[:24000]
+        payload = json.dumps({"search_results": raw_results})[:14000]
         return self.groq.generate_json(NODE3_JOB_POSTPROCESS, payload)
 
     def skill_gap(self, resume_json: dict[str, Any], jobs_json: dict[str, Any]) -> dict[str, Any]:

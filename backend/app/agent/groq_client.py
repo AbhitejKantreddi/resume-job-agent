@@ -54,7 +54,7 @@ class GroqClient:
             "temperature": 0.3,
             # Bound the completion so long answers can't get truncated into
             # invalid JSON. 8k is plenty for our largest node (skill-gap).
-            "max_tokens": 8192,
+            "max_tokens": 4096,
             "response_format": {"type": "json_object"},
             "messages": [
                 {"role": "system", "content": system_prompt},
