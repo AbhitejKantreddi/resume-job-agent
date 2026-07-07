@@ -6,26 +6,6 @@ letter — all as a **visible, multi-step run**, not a single LLM call.
 
 ---
 
-## ⚠️ One architectural decision (read this first)
-
-The build spec describes Gumloop as a node-based *visual workflow builder* that
-the backend triggers via a webhook (`GUMLOOP_WEBHOOK_URL`). That reflects an
-older understanding of the product — **Gumloop today is an agent-first
-platform**, so there is no separate webhook-triggered "6-node flow" to stand up.
-
-To keep this project **actually runnable and deployable end-to-end**, the six
-nodes from Section 5 of the spec are implemented **in-process inside the FastAPI
-backend** (`backend/app/agent/`), one function per node, with the *exact* system
-prompts from the spec preserved verbatim in `backend/app/agent/prompts.py`. The
-backend streams each node's status to the UI over Server-Sent Events, which
-gives you the same visible step-by-step "reasoning" the spec asks for — without
-depending on an external orchestrator that doesn't work the way the spec assumes.
-
-Everything else matches the spec: same endpoints, same node prompts, same UI
-components, same tech stack.
-
----
-
 ## What it does
 
 1. **Resume Parser** — extract structured JSON from the resume (Groq)
